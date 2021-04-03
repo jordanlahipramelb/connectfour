@@ -39,3 +39,7 @@ body {
 #column-top td:hover {
   background-color: gold;
 }
+
+.name {
+  margin-left: 180px;
+}
