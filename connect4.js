@@ -24,10 +24,10 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-  const htmlBoard = document.getElementById('board');
+  // Get "htmlBoard" variable from the item in HTML w/ID of "board"
+  const htmlBoard = document.querySelector('#board');
 
-  //makes column tops (clickable area at top of table to add your piece)
+  //Creates top row of table (clickable area at top of table to add your piece)
   const top = document.createElement('tr');
   top.setAttribute('id', 'column-top');
   top.addEventListener('click', handleClick);
@@ -40,6 +40,7 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   // makes actual playing board
+  // creates rows of table-data elements according to WIDTH and HEIGHT of board
   for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement('tr');
     for (let x = 0; x < WIDTH; x++) {
@@ -55,7 +56,8 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   for (let y = HEIGHT - 1; y >= 0; y--) {
-    if (!board[y][x]) {
+    cell = document.getElementById(`${y}-${x}`);
+    if (cell.children.length === 0) {
       return y;
     }
   }
@@ -65,7 +67,7 @@ function findSpotForCol(x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+  //make a div and insert into correct table cell
   const piece = document.createElement('div');
   piece.classList.add('piece');
   piece.classList.add(`p${currPlayer}`);
@@ -111,7 +113,7 @@ function handleClick(evt) {
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
-  currPlayer = currPlayer === 1 ? 2 : 1;
+  currPlayer === 1 ? (currPlayer = 2) : (currPlayer = 1);
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
